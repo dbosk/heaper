@@ -1,0 +1,206 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[british]{babel}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{authblk}
+\let\email\texttt
+
+\usepackage{noweb}
+% Needed to relax penalty for breaking code chunks across pages, otherwise 
+% there might be a lot of space following a code chunk.
+\def\nwendcode{\endtrivlist \endgroup}
+\let\nwdocspar=\smallbreak
+
+\usepackage{listings}
+\lstset{%
+  numbers=left,
+  numberstyle=\small,
+  basicstyle=\small
+}
+
+\usepackage[natbib,style=alphabetic,maxbibnames=99,backend=bibtexu]{biblatex}
+\addbibresource{heapq.bib}
+
+\title{heapq: Prioritizing things you need to do}
+\author{Daniel Bosk}
+\affil{%
+  School of Computer Science and Communication\\
+  KTH Royal Institute of Technology, SE-100\, 44 Stockholm\\
+  \email{dbosk@kth.se}
+}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+  \input{abstract.tex}
+\end{abstract}
+\clearpage
+\tableofcontents
+\clearpage
+
+@
+
+\section{Introduction}
+
+\dots
+
+\subsection{Building}
+
+\input{building.tex}
+
+\subsection{Outline}
+
+The main program is a Python 3 script, [[<<heapq.py>>]].
+We will use the following structure:
+<<heapq.py>>=
+#!/usr/bin/env python3
+<<imports>>
+<<classes>>
+<<functions>>
+def main(argv):
+  <<main body>>
+if __name__ == "__main__":
+  try:
+    sys.exit(main(sys.argv))
+  except Exception as err:
+    print("{0}: {1}".format(sys.argv[0], err), file=sys.stderr)
+    sys.exit(1)
+@ Then we will successively specify what these mean.
+The [[<<imports>>]] will contain our imported modules.
+For instance, since we use [[sys.argv]] and [[sys.exit]] above we'll need to 
+add
+<<imports>>=
+import sys
+@ to [[<<imports>>]].
+The code blocks [[<<classes>>]] and [[<<functions>>]] will contain our classes 
+and functions, respectively.
+So they will be treated mainly in \cref{ToDoLists}.
+
+The [[<<main body>>]] block contains the code of the main function.
+Basically, we need the following code blocks:
+<<main body>>=
+<<parse command-line arguments>>
+<<construct the heap>>
+<<output result>>
+<<clean up and exit>>
+@ This will be treated mainly in \cref{CommandLine}.
+
+To parse command-line arguments we will make use of Python's
+[[argparse]]~\cite{argparse}:
+<<parse command-line arguments>>=
+argp = argparse.ArgumentParser(description="Manages to-do heap.")
+@ We also need to add it to our imports:
+<<imports>>=
+import argparse
+@ The parsing step will then be to [[<<parse arguments>>]] and then
+[[<<process arguments>>]]:
+<<parse command-line arguments>>=
+<<parse arguments>>
+<<process arguments>>
+@
+The processing step is rather straight-forward using [[argparse]].
+We simply parse [[argv]] and get a Python dictionary containing the variables 
+we specify in [[<<parse arguments>>]]:
+<<process arguments>>=
+args = vars(argp.parse_args(argv[1:]))
+@
+
+
+\section{To-do \enquote{lists}}
+\label{ToDoLists}
+
+\dots
+
+\subsection{Things to do (to-do objects)}
+\label{ListElements}
+
+An element in the to-do list needs to contain at least two things: a priority 
+and the actual contents.
+For this we will use a class [[ToDo]] with two attributes, one for the priority 
+and another for the content:
+<<classes>>=
+class ToDo:
+  def __init__(self, prio, title, content):
+    self.prio = prio
+    self.title = title
+    self.content = content
+
+  def __str__(self):
+    return "{} ({}):\n{}".format(self.title, self.prio, self.content)
+
+  <<serializing ToDo>>
+@
+
+We want to store these to-do list entries, so we need to serialize them --- and 
+serialize them better than the above [[__str__]] method.
+Since we create the objects using a program, the serialized forms used for 
+storage can be \enquote{computer friendly} JSON.
+This will require Python's JSON library.
+<<imports>>=
+import json
+@
+
+To do the actual serialization we will provide a method that returns the JSON 
+representation, then we will provide a constructor that can construct the 
+object from the JSON representation.
+<<serializing ToDo>>=
+def json(self):
+  <<return JSON from ToDo>>
+
+def __init__(self, json_str):
+  <<construct ToDo from JSON>>
+@
+
+To create a JSON representation we will use the [[dumps]] interface.
+<<return JSON from ToDo>>=
+return json.dumps(
+  {"prio": self.prio,
+   "title": self.title,
+   "content": self.content})
+@
+
+Then the constructor can use the [[loads]] interface to return a dictionary 
+representing the JSON structure, then we can use the directory to get the 
+values to populate the attributes of the object.
+<<construct ToDo from JSON>>=
+d = json.loads(json_str)
+self.prio = d["prio"]
+self.title = d["title"]
+self.content = d["content"]
+@
+
+\subsection{A growing heap of things to do (to-do \enquote{lists})}
+\label{PriorityQueues}
+
+We will use Python's built-in version of the heap queue algorithm to construct 
+the actual to-do \enquote{list}.
+
+
+\section{Command-line}
+\label{CommandLine}
+
+\dots
+
+\subsection{Pushing}
+
+\dots
+
+
+\subsection{Popping and peeking}
+
+\dots
+
+
+\section*{Acknowledgements}
+
+This work is made available under the following license:
+\begin{quote}
+  \input{LICENSE}
+\end{quote}
+
+
+\printbibliography{}
+\end{document}
