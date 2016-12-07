@@ -21,7 +21,7 @@
   basicstyle=\small
 }
 
-\usepackage[natbib,style=alphabetic,maxbibnames=99,backend=bibtexu]{biblatex}
+\usepackage[natbib,style=alphabetic,maxbibnames=99]{biblatex}
 \addbibresource{heapq.bib}
 
 \title{heapq: Prioritizing things you need to do}
