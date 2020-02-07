@@ -1,3 +1,10 @@
+build.mk
+build.tex
+heaper.pdf
+heapercli.tex
+libheaper.tex
+ltxobj/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

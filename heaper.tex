@@ -1,0 +1,66 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[british]{babel}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{authblk}
+\let\email\texttt
+
+\usepackage{noweb}
+% Needed to relax penalty for breaking code chunks across pages, otherwise 
+% there might be a lot of space following a code chunk.
+\def\nwendcode{\endtrivlist \endgroup}
+\let\nwdocspar=\smallbreak
+
+\usepackage{listings}
+\lstset{%
+  numbers=left,
+  numberstyle=\small,
+  basicstyle=\small
+}
+
+\usepackage[natbib,style=alphabetic,maxbibnames=99]{biblatex}
+\addbibresource{heaper.bib}
+
+\title{heaper: Prioritizing things you need to do}
+\author{Daniel Bosk}
+\affil{%
+  School of Computer Science and Communication\\
+  KTH Royal Institute of Technology, SE-100\, 44 Stockholm\\
+  \email{dbosk@kth.se}
+}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+  \input{abstract.tex}
+\end{abstract}
+\clearpage
+\vspace*{\fill}
+\begin{quote}
+  \input{LICENSE}
+\end{quote}
+\clearpage
+\tableofcontents
+\clearpage
+
+
+\chapter{Building the software}
+
+\input{build.tex}
+
+
+\chapter{The library}
+
+\input{libheaper.tex}
+
+
+\chapter{The heaper command line interface}
+
+\input{heapercli.tex}
+
+
+\printbibliography
+\end{document}

@@ -1,0 +1,77 @@
+\section{Overview}
+
+We aim to organize a to-do list.
+Items on a to-do list has different priority, this means that a to-do list is 
+actually a priority queue.
+
+
+\section{To-do \enquote{lists}}
+\label{ToDoLists}
+
+\dots
+
+\subsection{Things to do (to-do objects)}
+\label{ListElements}
+
+An element in the to-do list needs to contain at least two things: a priority 
+and the actual contents.
+For this we will use a class [[ToDo]] with two attributes, one for the priority 
+and another for the content:
+<<classes>>=
+class ToDo:
+  def __init__(self, prio, title, content):
+    self.prio = prio
+    self.title = title
+    self.content = content
+
+  def __str__(self):
+    return "{} ({}):\n{}".format(self.title, self.prio, self.content)
+
+  <<serializing ToDo>>
+@
+
+We want to store these to-do list entries, so we need to serialize them --- and 
+serialize them better than the above [[__str__]] method.
+Since we create the objects using a program, the serialized forms used for 
+storage can be \enquote{computer friendly} JSON.
+This will require Python's JSON library.
+<<imports>>=
+import json
+@
+
+To do the actual serialization we will provide a method that returns the JSON 
+representation, then we will provide a constructor that can construct the 
+object from the JSON representation.
+<<serializing ToDo>>=
+def json(self):
+  <<return JSON from ToDo>>
+
+def __init__(self, json_str):
+  <<construct ToDo from JSON>>
+@
+
+To create a JSON representation we will use the [[dumps]] interface.
+<<return JSON from ToDo>>=
+return json.dumps(
+  {"prio": self.prio,
+   "title": self.title,
+   "content": self.content})
+@
+
+Then the constructor can use the [[loads]] interface to return a dictionary 
+representing the JSON structure, then we can use the directory to get the 
+values to populate the attributes of the object.
+<<construct ToDo from JSON>>=
+d = json.loads(json_str)
+self.prio = d["prio"]
+self.title = d["title"]
+self.content = d["content"]
+@
+
+\subsection{A growing heap of things to do (to-do \enquote{lists})}
+\label{PriorityQueues}
+
+We will use Python's built-in version of the heap queue algorithm to construct 
+the actual to-do \enquote{list}.
+
+

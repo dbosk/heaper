@@ -1,19 +1,17 @@
 We will have a make file with the building instructions.
 We already have a file \enquote{Makefile}, for building this documentation, 
-which we will extend by and include file \enquote{heapq.mk}.
+which we will extend by and include file \enquote{build.mk}.
 Our starting point is thus:
 \lstinputlisting{Makefile}
 
 We can see that our include file is included above and that there is an 
 instruction to build it from this source code.
-We will give the contents of that file as the code block [[<<heapq.mk>>]] when 
+We will give the contents of that file as the code block [[<<build.mk>>]] when 
 we describe our code and the relations between the different files we will use 
 herein.
-However, we will use C++, so we can set some of the variables:
-<<heapq.mk>>=
-CFLAGS+=		-Wall -Wextra
-CXXFLAGS+=	-Wall -Wextra --std=c++11
-LDLIBS=
+<<build.mk>>=
+heaper:
+	true
 @
 
 

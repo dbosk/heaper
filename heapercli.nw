@@ -1,0 +1,73 @@
+\section{Outline}
+
+The main program is a Python 3 script, [[<<heaper.py>>]].
+We will use the following structure:
+<<heaper.py>>=
+#!/usr/bin/env python3
+<<imports>>
+<<classes>>
+<<functions>>
+def main(argv):
+  <<main body>>
+if __name__ == "__main__":
+  try:
+    sys.exit(main(sys.argv))
+  except Exception as err:
+    print("{0}: {1}".format(sys.argv[0], err), file=sys.stderr)
+    sys.exit(1)
+@ Then we will successively specify what these mean.
+The [[<<imports>>]] will contain our imported modules.
+For instance, since we use [[sys.argv]] and [[sys.exit]] above we'll need to 
+add
+<<imports>>=
+import sys
+@ to [[<<imports>>]].
+The code blocks [[<<classes>>]] and [[<<functions>>]] will contain our classes 
+and functions, respectively.
+So they will be treated mainly in \cref{ToDoLists}.
+
+The [[<<main body>>]] block contains the code of the main function.
+Basically, we need the following code blocks:
+<<main body>>=
+<<parse command-line arguments>>
+<<construct the heap>>
+<<output result>>
+<<clean up and exit>>
+@ This will be treated mainly in \cref{CommandLine}.
+
+To parse command-line arguments we will make use of Python's
+[[argparse]]~\cite{argparse}:
+<<parse command-line arguments>>=
+argp = argparse.ArgumentParser(description="Manages to-do heap.")
+@ We also need to add it to our imports:
+<<imports>>=
+import argparse
+@ The parsing step will then be to [[<<parse arguments>>]] and then
+[[<<process arguments>>]]:
+<<parse command-line arguments>>=
+<<parse arguments>>
+<<process arguments>>
+@
+The processing step is rather straight-forward using [[argparse]].
+We simply parse [[argv]] and get a Python dictionary containing the variables 
+we specify in [[<<parse arguments>>]]:
+<<process arguments>>=
+args = vars(argp.parse_args(argv[1:]))
+@
+
+\section{Command-line}
+\label{CommandLine}
+
+\dots
+
+\subsection{Pushing}
+
+\dots
+
+
+\subsection{Popping and peeking}
+
+\dots
+
+
+
