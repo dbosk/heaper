@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[british]{babel}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{authblk}
+\let\email\texttt
+
+\usepackage{noweb}
+% Needed to relax penalty for breaking code chunks across pages, otherwise 
+% there might be a lot of space following a code chunk.
+\def\nwendcode{\endtrivlist \endgroup}
+\let\nwdocspar=\smallbreak
+
+\usepackage{listings}
+\lstset{%
+  numbers=left,
+  numberstyle=\small,
+  basicstyle=\small
+}
+
+\usepackage[natbib,style=alphabetic,maxbibnames=99]{biblatex}
+\addbibresource{heaper.bib}
+
+\title{libheaper: Library for scheduling things in prioritized order}
+\author{Daniel Bosk}
+\affil{%
+  \email{daniel@bosk.se}
+}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+  \input{abstract.tex}
+\end{abstract}
+\clearpage
+\vspace*{\fill}
+\begin{quote}
+  \input{../LICENSE}
+\end{quote}
+\clearpage
+\tableofcontents
+\clearpage
+
+
+\input{libheaper.tex}
+
+
+\printbibliography
+\end{document}

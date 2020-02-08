@@ -1,31 +1,17 @@
-\section{Overview}
+\section{Things to do (to-do objects)}
+\label{ToDoObjects}
 
-We aim to organize a to-do list.
-Items on a to-do list has different priority, this means that a to-do list is 
-actually a priority queue.
-
-
-\section{To-do \enquote{lists}}
-\label{ToDoLists}
-
-\dots
-
-\subsection{Things to do (to-do objects)}
-\label{ListElements}
-
-An element in the to-do list needs to contain at least two things: a priority 
-and the actual contents.
-For this we will use a class [[ToDo]] with two attributes, one for the priority 
-and another for the content:
+An element in a to-do list has at least two attributes: a priority and the 
+actual contents (what should be done).
+For this we will use a class [[ToDo]]:
 <<classes>>=
 class ToDo:
-  def __init__(self, prio, title, content):
+  def __init__(self, prio, content):
     self.prio = prio
-    self.title = title
     self.content = content
 
   def __str__(self):
-    return "{} ({}):\n{}".format(self.title, self.prio, self.content)
+    return "[{}] {}".format(self.prio, self.content)
 
   <<serializing ToDo>>
 @
