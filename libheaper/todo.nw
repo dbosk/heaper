@@ -67,10 +67,3 @@ self.title = d["title"]
 self.content = d["content"]
 @
 
-\subsection{A growing heap of things to do (to-do \enquote{lists})}
-\label{PriorityQueues}
-
-We will use Python's built-in version of the heap queue algorithm to construct 
-the actual to-do \enquote{list}.
-
-

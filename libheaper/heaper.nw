@@ -1,0 +1,12 @@
+\section{A growing heap of things to do (to-do \enquote{lists})}
+\label{Heaper}
+
+We will use Python's built-in version of the heap queue algorithm to construct 
+the actual to-do \enquote{list}.
+However, we need an interface to use with our to-do objects 
+(\cref{ToDoObjects}).
+<<heaper.py>>=
+<<imports>>
+<<functions>>
+<<classes>>
+@
