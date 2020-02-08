@@ -53,7 +53,6 @@ To create a JSON representation we will use the [[dumps]] interface.
 <<return JSON from ToDo>>=
 return json.dumps(
   {"prio": self.prio,
-   "title": self.title,
    "content": self.content})
 @
 
