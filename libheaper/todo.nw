@@ -1,6 +1,19 @@
 \section{Things to do (to-do objects)}
 \label{ToDoObjects}
 
+We will now define the class of objects that are contained in a to-do list.
+We define the class in [[<<todo.py>>]] and its tests in [[<<todo-test.py>>]].
+<<todo.py>>=
+<<imports>>
+<<classes>>
+<<functions>>
+@
+<<todo-test.py>>=
+import unittest
+
+<<test cases>>
+@
+
 An element in a to-do list has at least two attributes: a priority and the 
 actual contents (what should be done).
 For this we will use a class [[ToDo]]:
