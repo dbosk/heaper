@@ -22,3 +22,11 @@ it there is an accompanying Makefile, so compilation is as easy as running
  - `heapq` which is the main file.
  - `pushq`, `popq`, `peekq`; which are symbolic links to `heapq`.
  - `heapq.pdf` which is the documented source code.
+
+The project uses Poetry for dependency management. To install dependencies, run:
+
+    make depends
+
+Or directly using Poetry:
+
+    poetry install
