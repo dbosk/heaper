@@ -7,18 +7,19 @@ SUBDIR_GOALS?= 	all clean distclean
 
 .PHONY: depends
 depends:
-	pip3 install -r requirements.txt
+	poetry install
 
 .PHONY:  install
 install: depends
-	pip3 install .
+	poetry install
 
 .PHONY: environment
 environment:
-	pipenv install -e .
+	poetry install
 
 requirements.txt:
-	pigar -c
+	@echo "Note: Use 'poetry export -f requirements.txt --output requirements.txt --without-hashes' to generate requirements.txt"
+	@echo "This requires: poetry self add poetry-plugin-export"
 
 
 
