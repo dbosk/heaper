@@ -1,0 +1,5 @@
+[console_scripts]
+heaper = libheaper.cli:app
+peekq = libheaper.cli:peekq_app
+popq = libheaper.cli:popq_app
+pushq = libheaper.cli:pushq_app
